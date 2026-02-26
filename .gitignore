@@ -4,6 +4,6 @@ Thumbs.db
 images/cache/
 images/tmp/
 images/license.txt
-/config.php
+config.php
 modules/images/vendor/
 database.sql
