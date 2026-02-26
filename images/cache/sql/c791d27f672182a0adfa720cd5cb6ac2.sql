@@ -1,0 +1,1 @@
+{"SELECT `id`, `name` FROM `delivery_partner` WHERE 1":["1772088208",{"1":"huda","2":"tomi","3":"anis","4":"yahya"}]}

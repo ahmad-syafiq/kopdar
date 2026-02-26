@@ -1,0 +1,1 @@
+{"SELECT name FROM bbc_module WHERE is_config=1 AND active=1 ORDER BY id ASC":["1772087855",["_cpanel","content","dashboard"]]}

@@ -1,0 +1,36 @@
+#php_flag short_open_tag on
+#Options +FollowSymLinks
+RewriteEngine On
+RewriteRule ^dummyPageToBypassCORS$ /_setting.php [L]
+
+RewriteCond %{REQUEST_URI}::$1 ^(.*?/)(.*)::\2$
+RewriteRule ^(.*)$ - [E=BASE:%1]
+
+RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
+RewriteRule ^.* - [F]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (/|.htm|.php|.html|.xml|/[^.]*)$  [NC]
+RewriteRule !^((admin|blocks|images|includes|modules|templates)/?)*$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} (.css|.js)$  [NC]
+RewriteRule ^(.*)$ index.php?_loader=$1 [L]
+
+# Deny access to database.sql
+<Files database.sql>
+	Order allow,deny
+	Deny from all
+</Files>
+
+RewriteRule ^(images/uploads/(.*htm|.*php|.*html|.*xml)$) - [F,L,NC]
+
+# For approval deeplink
+<Files 'apple-app-site-association'>
+	ForceType 'application/json'
+</Files>
+
+# fisip.net
+# Send all blocked request to homepage with 404 Not Found!
+ErrorDocument 404 file_not_found

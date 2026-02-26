@@ -1,0 +1,1 @@
+{"SELECT * FROM `bbc_module` WHERE `id`=2":["1772088013",{"id":"2","name":"user","site_title":"","site_desc":"","site_keyword":"","created":"0000-00-00+00%3A00%3A00","protected":"0","allow_group":"%2Call%2C","order_func_pre":"","order_func_post":"","account_func_pre":"","account_func_post":"","search_func":"","is_config":"0","active":"1"}]}

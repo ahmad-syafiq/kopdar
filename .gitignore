@@ -1,0 +1,9 @@
+.DS_Store
+composer.lock
+Thumbs.db
+images/cache/
+images/tmp/
+images/license.txt
+/config.php
+modules/images/vendor/
+database.sql

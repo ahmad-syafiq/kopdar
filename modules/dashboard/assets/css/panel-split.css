@@ -1,0 +1,89 @@
+/* ADD BUTTON (KANAN ATAS) */
+#panel_button {
+	margin: 0 0 10px 0;
+	opacity: 0;
+	cursor: default;
+	transform: translateX(0);
+	transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+#panel_button.show {
+	opacity: 1;
+	cursor: pointer;
+	transform: translateX(0);
+}
+
+/* PANEL WRAPPER */
+.row_flex {
+	display: flex;
+	flex-wrap: nowrap;
+	overflow: hidden;
+}
+
+/* PANEL LIST */
+#panel_list {
+	transition: flex-basis 0.3s ease, max-width 0.3s ease;
+	min-width: 0;
+}
+
+#panel_list.full {
+	flex: 0 0 100%;
+	max-width: 100%;
+}
+
+#panel_list.split {
+	flex: 0 0 50%;
+	max-width: 50%;
+}
+
+.panel_list_table {
+	margin-bottom:20px;
+	width: 100%;
+	height: 100%;
+	overflow-x: auto;
+	overflow-y: visible;
+	white-space: nowrap;
+	-webkit-overflow-scrolling: touch;
+}
+
+.panel_list_table table {
+	min-width: max-content;
+	border-collapse: separate;
+}
+
+.panel_list_table [name="roll"] {
+	overflow: auto;
+}
+
+/* PANEL EDIT */
+#panel_edit {
+	flex: 0 0 50%;
+	max-width: 50%;
+	opacity: 0;
+	transform: translateX(100%);
+	transition: transform 0.3s ease, opacity 0.3s ease;
+	pointer-events: none;
+}
+
+#panel_edit.show {
+	opacity: 1;
+	transform: translateX(0);
+	pointer-events: auto;
+}
+
+@media (max-width: 992px) {
+  .row_flex {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #panel_edit,
+	#panel_list {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+	}
+
+	#panel_list.split {
+		display: none;
+	}
+}

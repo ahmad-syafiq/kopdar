@@ -1,0 +1,68 @@
+#!/bin/bash
+#
+# esoftplay_async       Bring up/down networking
+#
+# chkconfig: 2345 10 90
+# description: Activates/Deactivates asyncronous in esoftplay framework \
+#              start at boot time.
+#
+### BEGIN INIT INFO
+# Provides: $esoftplay_async
+# Should-Start: iptables ip6tables NetworkManager-wait-online NetworkManager $network-pre
+# Short-Description: Bring up/down asyncronous
+# Description: Bring up/down asyncronous
+### END INIT INFO
+
+# Include functions
+if [ -f "/lib/lsb/init-functions" ]; then
+  . /lib/lsb/init-functions
+fi
+
+if [ -f "/etc/init.d/functions" ]; then
+  . /etc/init.d/functions
+fi
+
+start() {
+  echo -n "Starting async: "
+  touch /opt/async.log
+  chmod 777 /opt/async.log
+  dtach -n /tmp/async.socket /bin/bash /var/www/html/master/includes/system/docker/esoftplay_worker
+}
+
+stop() {
+  echo -n "stopping async: "
+  if [ -S "/tmp/async.socket" ]; then
+    pkill dtach
+  fi
+}
+
+status() {
+  if [ -S "/tmp/async.socket" ]; then
+    echo -n "ACTIVE async: $(wc -l < /opt/async.log) - $(wc -l < /tmp/async.log)"
+  else
+    echo -n "inactive async...."
+  fi
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart)
+    stop
+    start
+    ;;
+  status)
+    status
+    ;;
+  *)
+    echo "Usage: $NAME {start|stop|restart|status}" >&2
+    exit 1
+    ;;
+esac
+
+echo ""
+exit 0
